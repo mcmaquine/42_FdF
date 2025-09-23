@@ -10,7 +10,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = ./minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a
 
-SRC = main.c
+SRC = main.c fdf_draw_util.c
 OBJ = $(SRC:.c=.o)
 
 CFLAGS = -Wall -Werror -Wextra -g

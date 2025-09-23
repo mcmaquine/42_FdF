@@ -1,19 +1,26 @@
 #include "fdf.h"
 
-int	windows_close(int keycode, t_window *t_wind)
+int	key_press_event(int keycode, t_window *t_wind)
 {
-	(void)keycode;
-	mlx_destroy_window(t_wind->mlx, t_wind->win);
-	exit(0);
+	if (keycode == ESC)
+	{
+		mlx_destroy_window(t_wind->mlx, t_wind->win);
+		exit(0);
+	}
 	return (0);
 }
 
 int	main(void)
 {
-	t_window	t_w;
+	t_window	wind;
+	t_data		img;
 
-	t_w.mlx = mlx_init();
-	t_w.win = mlx_new_window(t_w.mlx, 1280, 720, "Hello world!");
-	mlx_hook(t_w.win, 2, 1L<<0, windows_close, &t_w);
-	mlx_loop(t_w.mlx);
+	create_window(&wind, 1280, 720);
+	img.img = mlx_new_image(wind.mlx, wind.width, wind.height);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+	&img.endian);
+	draw_circle(200, &img, &wind);
+	mlx_put_image_to_window(wind.mlx, wind.win, img.img, 0, 0);
+	mlx_hook(wind.win, 2, 1L<<0, key_press_event, &wind);
+	mlx_loop(wind.mlx);
 }
