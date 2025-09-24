@@ -52,11 +52,11 @@ void	draw_circle(int radius, t_data *data , t_window *wind)
 		x = (int)radius * cos(theta);
 		y = (int)radius * sin(theta);
 		theta += dtheta;
-		x = x - wind->width/2;
-		y = wind->height/2 - y;
-		paint_pixel(data, x, y, 0xFFFFFF);
+		//x = x - wind->width/2;
+		//y = wind->height/2 - y;
+		paint_pixel(data, x - wind->width/2, wind->height/2 - y, 0xFFFFFF);
 		rotate_about_x(&y, 45*M_PI/180.0);
-		paint_pixel(data, x, y + 100, 0x007df9);
+		paint_pixel(data, x - wind->width/2, wind->height/2 - y, 0x007df9);
 	}
 }
 
