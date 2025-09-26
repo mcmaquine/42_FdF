@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:57:33 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/09/23 16:08:29 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/09/26 17:03:08 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ typedef struct s_window
 	void	*win;
 	int		width;
 	int		height;
-} t_window;
+	t_data	canva;
+}	t_window;
 
-void	paint_pixel(t_data *data, int x, int y, int color);
+void	paint_pixel(t_window *w, int x, int y, int color);
 void	*create_window(t_window *wind, int width, int height);
 void	draw_circle(int radius, t_data *data , t_window *wind);
 #endif
