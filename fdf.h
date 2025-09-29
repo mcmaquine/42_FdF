@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:57:33 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/09/26 17:03:08 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/09/29 16:57:33 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define FDF_H
 # include <math.h>
 # include <fcntl.h>
-# include "./libft/libft.h"
-# include "./minilibx-linux/mlx.h"
+# include "libft/libft.h"
+# include "minilibx-linux/mlx.h"
 # define ESC 65307
 
 typedef struct s_data
@@ -34,9 +34,20 @@ typedef struct s_window
 	int		width;
 	int		height;
 	t_data	canva;
+	t_list	*lpts;
 }	t_window;
 
-void	paint_pixel(t_window *w, int x, int y, int color);
-void	*create_window(t_window *wind, int width, int height);
-void	draw_circle(int radius, t_window *wind);
+typedef struct s_point
+{
+	int			x;
+	int			y;
+	int			z;
+	__uint32_t	color;
+}	t_point;
+
+__uint32_t	atoi_16(char *ptr);
+void		paint_pixel(t_window *w, int x, int y, int color);
+void		*create_window(t_window *wind, int width, int height);
+void		draw_circle(int radius, t_window *wind);
+int			validate_file(int fd);
 #endif
