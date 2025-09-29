@@ -43,7 +43,7 @@ void	rotate_about_x(int *y, float theta)
 void	draw_circle(int radius, t_window *wind)
 {
 	float	theta;
-	float	dtheta = 2 * M_PI / data->line_length;
+	float	dtheta = 2 * M_PI / wind->canva.line_length;
 	int		x;
 	int		y;
 	

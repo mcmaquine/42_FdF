@@ -13,6 +13,7 @@
 #ifndef FDF_H
 # define FDF_H
 # include <math.h>
+# include <fcntl.h>
 # include "./libft/libft.h"
 # include "./minilibx-linux/mlx.h"
 # define ESC 65307
@@ -37,5 +38,5 @@ typedef struct s_window
 
 void	paint_pixel(t_window *w, int x, int y, int color);
 void	*create_window(t_window *wind, int width, int height);
-void	draw_circle(int radius, t_data *data , t_window *wind);
+void	draw_circle(int radius, t_window *wind);
 #endif
