@@ -10,7 +10,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = ./minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a
 
-SRC = main.c fdf_utils.c fdf_draw_util.c fdf_file_validation.c
+SRC = fdf.c fdf_utils.c fdf_draw_util.c fdf_file_validation.c
 OBJ = $(SRC:.c=.o)
 
 CFLAGS = -Wall -Werror -Wextra -g
@@ -19,7 +19,7 @@ LFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -L$(INCLIB) -lXext -lX11 -lm -lb
 all: $(LIBFT) $(MLX) $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	cc $(OBJ) -o $@ $(LFLAGS)
+	cc $^ -o $@ $(LFLAGS)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR) all

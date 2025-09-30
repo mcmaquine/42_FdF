@@ -19,21 +19,36 @@ void	fdf_usage(void)
 int	main(int argc, char **argv)
 {
 	t_window	wind;
-	//int			fd;
+	int			fd;
+	t_point		*p;
+	t_list		*l;
 
+	wind.lpts = NULL;
 	if (argc < 2)
 	{
 		fdf_usage();
 		exit(0);
 	}
-	// fd = open(argv[1], O_RDONLY);
-	// if (fd < 3)
-	// {
-	// 	ft_printf("Error opening file\n");
-	// 	return (1);
-	// }
-	wind.lpts = ft_calloc(1, sizeof(t_list));
-	ft_printf("%d\n", atoi_16(argv[1]));
+	fd = open(argv[1], O_RDONLY);
+	close(fd);
+	if (fd < 3)
+	{
+		ft_printf("Error opening file\n");
+		return (1);
+	}
+	if(!read_points(argv[1], &wind))
+	{
+		ft_printf("File cannot be loaded\n");
+		exit(0);
+	}
+	l = wind.lpts;
+	while (l)
+	{
+		p = l->content;
+		ft_printf("x: %d y: %d z: %d\n", p->x, p->y, p->z);
+		l = l->next;
+	}
+	ft_lstclear(&wind.lpts, free_points);
 	// create_window(&wind, 1280, 720);
 	// img.img = mlx_new_image(wind.mlx, wind.width, wind.height);
 	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,

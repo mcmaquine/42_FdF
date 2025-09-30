@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:41:49 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/09/29 16:57:07 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/09/30 11:09:27 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,22 @@ __uint32_t	atoi_16(char *ptr)
 		ptr += 2;
 	result = 0;
 	i = 0;
-	while (ptr[i])
+	while (ptr[i] && ptr[i] != '\n')
 	{
 		result = 16 * result + get_hex_value(ptr[i]);
 		i++;
 	}
 	return (result);
+}
+
+t_point	*new_point(int x, int y, int z, __uint32_t color)
+{
+	t_point	*p;
+
+	p = ft_calloc(1, sizeof(t_point));
+	p->color = color;
+	p->x = x;
+	p->y = y;
+	p->z = z;
+	return (p);
 }
