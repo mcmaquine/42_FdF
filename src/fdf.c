@@ -1,4 +1,5 @@
 #include "fdf.h"
+#include <stdio.h>
 
 int	key_press_event(int keycode, t_window *t_wind)
 {
@@ -18,12 +19,11 @@ void	fdf_usage(void)
 
 int	main(int argc, char **argv)
 {
-	t_window	wind;
-	int			fd;
-	t_point		*p;
-	t_list		*l;
+	//t_window	wind;
+	//int			fd;
+	t_matrix	*a, *b, *c;
 
-	wind.lpts = NULL;
+	/*wind.lpts = NULL;
 	if (argc < 2)
 	{
 		fdf_usage();
@@ -40,15 +40,25 @@ int	main(int argc, char **argv)
 	{
 		ft_printf("File cannot be loaded\n");
 		exit(0);
-	}
-	l = wind.lpts;
-	while (l)
+	}//ate aqui eh para valer  
+	ft_lstclear(&wind.lpts, free_points);*/
+	(void)argc;
+	(void)argv;
+	a = create_matrix(1, 2);
+	b = create_matrix(2, 2);
+	a->a[0][0] = 3; a->a[0][1] = 3;
+	b->a[0][0] = 6; b->a[0][1] = -7;
+	b->a[1][0] = -4; b->a[1][1] = 5;
+	c = matmul(a, b);
+	for (int i = 0; i < c->row; i++)
 	{
-		p = l->content;
-		ft_printf("x: %d y: %d z: %d\n", p->x, p->y, p->z);
-		l = l->next;
+		for (int j = 0; j < c->col; j++)
+			printf("%.0f ", c->a[i][j]);
+		printf("\n");
 	}
-	ft_lstclear(&wind.lpts, free_points);
+	free_matrix(a);
+	free_matrix(b);
+	free_matrix(c);
 	// create_window(&wind, 1280, 720);
 	// img.img = mlx_new_image(wind.mlx, wind.width, wind.height);
 	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,

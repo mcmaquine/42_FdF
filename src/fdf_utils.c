@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:41:49 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/09/30 11:09:27 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/01 16:16:10 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,46 @@ t_point	*new_point(int x, int y, int z, __uint32_t color)
 	p->y = y;
 	p->z = z;
 	return (p);
+}
+
+/*
+Create a matrix initilizing its values with zero
+*/
+t_matrix	*create_matrix(int rows, int cols)
+{
+	int			i;
+	t_matrix	*m;
+
+	if (!rows || !cols)
+		return (NULL);
+	i = 0;
+	m = ft_calloc(1, sizeof(t_matrix));
+	if (!m)
+		return (NULL);
+	m->a = ft_calloc(rows, sizeof(double *));
+	if (!m->a)
+		return (NULL);
+	while (i < rows)
+	{
+		m->a[i] = ft_calloc(cols, sizeof(double));
+		i++;
+	}
+	m->col = cols;
+	m->row = rows;
+	return (m);
+}
+
+void	free_matrix(t_matrix *m)
+{
+	int i;
+	if (!m)
+		return ;
+	i = 0;
+	while (i < m->row)
+	{
+		free(m->a[i]);
+		i++;
+	}
+	free(m->a);
+	free(m);
 }
