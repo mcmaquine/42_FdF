@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 14:58:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/01 17:04:28 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/02 16:58:47 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,23 @@ Return a matrix which transforms a view into isometric form.
 t_matrix	*get_isometric_mtx_tf(void)
 {
 	double		deg_rot_x;
-	t_matrix	*mat_rot_tf_1;
-	t_matrix	*mat_rot_tf_2;
-	t_matrix	*mat_rot_tf_3;
+	t_matrix	*mat_1;
+	t_matrix	*mat_2;
+	t_matrix	*mat_3;
 
 	deg_rot_x = atan(1 / sqrt(2));
-	mat_rot_tf_2 = get_rotate_mtx_x(deg_rot_x);
-	mat_rot_tf_1 = get_rotate_mtx_y(M_PI / 4);
-	mat_rot_tf_3 = matmul(mat_rot_tf_1, mat_rot_tf_2);
-	free_matrix(mat_rot_tf_1);
-	free_matrix(mat_rot_tf_2);
-	mat_rot_tf_1 = get_rotate_mtx_x(- M_PI / 2);
-	mat_rot_tf_2 = matmul(mat_rot_tf_1, mat_rot_tf_3);
-	free_matrix(mat_rot_tf_1);
-	return (mat_rot_tf_2);
+	mat_2 = get_rotate_mtx_x(deg_rot_x);
+	mat_1 = get_rotate_mtx_y(M_PI / 4);
+	mat_3 = mult_mat(mat_1, mat_2);
+	free_matrix(mat_1);
+	free_matrix(mat_2);
+	mat_1 = get_rotate_mtx_x(-M_PI / 2);
+	mat_2 = mult_mat(mat_1, mat_3);
+	free_matrix(mat_1);
+	free_matrix(mat_3);
+	mat_1 = get_scale_mtx(1, 1, -1);
+	mat_3 = mult_mat(mat_1, mat_2);
+	free_matrix(mat_1);
+	free_matrix(mat_2);
+	return (mat_3);
 }

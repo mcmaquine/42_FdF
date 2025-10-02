@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 10:13:58 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/09/30 17:38:44 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/02 16:53:00 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	validate_file(int fd)
 	line = get_next_line(fd);
 	split = ft_split(line, ' ');
 	last_wc = ft_free_split(split);
-	while(line)
+	while (line)
 	{
 		split = ft_split(line, ' ');
 		wc = ft_free_split(split);
-		if(wc != last_wc)
+		if (wc != last_wc)
 		{
 			wc = 0;
 			gnl_gc(fd);
@@ -64,24 +64,24 @@ int	validate_file(int fd)
 /*
 
 */
-void	validate_element(char **spl, int x, t_window *w)
+void	validate_element(char **spl, int y, t_window *w)
 {
-	int			y;
+	int			x;
 	int			z;
 	t_point		*p;
 	__uint32_t	color;
 
-	y = 0;
-	while (spl[y])
+	x = 0;
+	while (spl[x])
 	{
-		z = atoi(spl[y]);
-		color = get_color_param(spl[y]);
+		z = atoi(spl[x]);
+		color = get_color_param(spl[x]);
 		p = new_point(x, y, z, color);
 		if (!w->lpts)
 			w->lpts = ft_lstnew(p);
 		else
 			ft_lstadd_back(&(w->lpts), ft_lstnew(p));
-		y++;
+		x++;
 	}
 	ft_free_split(spl);
 }
@@ -92,11 +92,11 @@ Read every point from a file and stores it in a struct
 int	read_points(char *file_name, t_window *w)
 {
 	char	*line;
-	int		x;
+	int		y;
 	char	**spl;
 	int		fd;
 
-	x = 0;
+	y = 0;
 	fd = open(file_name, O_RDONLY);
 	if (!validate_file(fd))
 		return (0);
@@ -105,13 +105,13 @@ int	read_points(char *file_name, t_window *w)
 	while (line)
 	{
 		spl = ft_split(line, ' ');
-		validate_element(spl, x, w);
+		validate_element(spl, y, w);
 		free(line);
 		line = get_next_line(fd);
-		x++;
+		y++;
 	}
 	close(fd);
-	return (x);
+	return (y);
 }
 
 /*
