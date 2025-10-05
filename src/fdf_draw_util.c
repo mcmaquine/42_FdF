@@ -50,29 +50,42 @@ void	clear_canva(t_window *w)
 /*
 Work in progress.
 */
-void	paint_canva(t_window *w)
+void	paint_canva(t_window *w, t_matrix *tf, int x, int y)
 {
 	t_list	*lst;
 	t_point	*p;
-	t_matrix	*m, *m2, *m3;
 
 	lst = w->lpts;
-	m = get_scale_mtx(50, 50, 20);
-	m2 = get_isometric_mtx_tf();
-	m3 = mult_mat(m, m2);
 	while (lst)
 	{
-		p = mult_point_matrix((t_point *)lst->content, m3);
+		p = mult_point_matrix((t_point *)lst->content, tf);
 		p->color = ((t_point *)lst->content)->color;
-		paint_pixel(w, p->x + 300, p->y + 100, p->color);
+		paint_pixel(w, p->x + w->width/2 - x, p->y + w->height/2 - y, p->color);
 		free(p);
 		lst = lst->next;
 	}
-	free_matrix(m);
-	free_matrix(m2);
-	free_matrix(m3);
 }
+/*
+Copy content from point p to a new point.
+Returns address to new point.
+*/
+void	*copy_point(void *p)
+{
+	t_point	*copy;
+	t_point	*point;
 
+	if (!p)
+		return (NULL);
+	point = (t_point *)p;
+	copy = ft_calloc(1, sizeof(t_point));
+	if (!copy)
+		return (NULL);
+	copy->x = point->x;
+	copy->y = point->y;
+	copy->z = point->z;
+	copy->color = point->color;
+	return (copy);
+}
 /*
 	Draw a circle centered on screen
 	radius is in pixels.

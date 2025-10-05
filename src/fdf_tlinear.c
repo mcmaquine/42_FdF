@@ -36,7 +36,7 @@ t_matrix	*get_scale_mtx(double kx, double ky, double kz)
 Return a rotate matrix around x axis
 theta: angle in radians
 */
-t_matrix	*get_rotate_mtx_x(float theta)
+t_matrix	*get_rotate_mtx_x(double theta)
 {
 	t_matrix	*sm;
 
@@ -55,7 +55,7 @@ t_matrix	*get_rotate_mtx_x(float theta)
 Return a rotate matrix around y axis
 theta: angle in radians
 */
-t_matrix	*get_rotate_mtx_y(float theta)
+t_matrix	*get_rotate_mtx_y(double theta)
 {
 	t_matrix	*sm;
 
@@ -74,7 +74,7 @@ t_matrix	*get_rotate_mtx_y(float theta)
 Return a rotate matrix around z axis
 theta: angle in radians
 */
-t_matrix	*get_rotate_mtx_z(float theta)
+t_matrix	*get_rotate_mtx_z(double theta)
 {
 	t_matrix	*sm;
 

@@ -47,7 +47,7 @@ int	validate_file(int fd)
 	{
 		split = ft_split(line, ' ');
 		wc = ft_free_split(split);
-		if (wc != last_wc)
+		if (wc != last_wc || wc == 0)
 		{
 			wc = 0;
 			gnl_gc(fd);

@@ -43,16 +43,45 @@ int	file_input_validations(t_window *w, int argc, char **argv)
 	}
 	return (1);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	t_window	w;
+	int	x;
+	t_matrix	*m, *ms, *tf;
 
+	w.height = 720;
+	w.width = 1280;
+	m = get_isometric_mtx_tf();
+	ms = get_scale_mtx(10, 10, 10);
+	tf = mult_mat(ms, m);
 	file_input_validations(&w, argc, argv);
-	get_max_scalings(&w);
+	x = get_max_scalings(&w, tf);
+	ft_printf("Scaling x: %d\n", x);
 	ft_lstclear(&(w.lpts), free_points);
+	free_matrix(m);
+	free_matrix(ms);
+	free_matrix(tf);
+}*/
+
+static void	start_draw(t_window *w)
+{
+	t_matrix	*scaled;
+	t_matrix	*m;
+	int			x;
+	int			y;
+
+	w->current_tf = get_isometric_mtx_tf();
+	w->curr_scale = 10.0;
+	scaled = get_scale_mtx(w->curr_scale,w->curr_scale, 1);
+	m = mult_mat(scaled, w->current_tf);
+	get_figure_center(w, m, &x, &y);
+	paint_canva(w, m, x, y);
+	mlx_put_image_to_window(w->mlx, w->win, w->canva.img, 0, 0);
+	free_matrix(scaled);
+	free_matrix(m);
 }
-/*
+
 int	main(int argc, char **argv)
 {
 	t_window	wind;
@@ -66,9 +95,9 @@ int	main(int argc, char **argv)
 	wind.canva.addr = mlx_get_data_addr(wind.canva.img,
 			&wind.canva.bits_per_pixel, &wind.canva.line_length,
 			&wind.canva.endian);
-	paint_canva(&wind);
-	mlx_put_image_to_window(wind.mlx, wind.win, wind.canva.img, 0, 0);
+	start_draw(&wind);
 	mlx_hook(wind.win, 2, 1L << 0, key_press_event, &wind);
 	mlx_hook(wind.win, 17, 0, on_close, &wind);
+	mlx_mouse_hook(wind.win, mouse_hook, &wind);
 	mlx_loop(wind.mlx);
-}*/
+}

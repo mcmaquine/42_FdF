@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+
 /*
 Multiply two matrixes.
 Returns matrix product of the operatrion. NULL if operations not possible.
@@ -43,20 +44,27 @@ t_matrix	*mult_mat(t_matrix *a, t_matrix *b)
 	return (c);
 }
 
-t_point	*mult_point_matrix(t_point *p, t_matrix *m)
+void	*mult_point_matrix(void *p, void *m)
 {
-	t_point	*cp;
+	t_point		*cp;
+	t_point		*pnt;
+	t_matrix	*mat;
 
 	if (!p || !m)
 		return (NULL);
-	if (m->col != 3)
+	mat = m;
+	pnt = p;
+	if (mat->col != 3)
 		return (NULL);
 	cp = ft_calloc(1, sizeof(t_point));
 	if (!cp)
 		return (NULL);
-	cp->x = (int )(p->x * m->a[0][0] + p->y * m->a[1][0] + p->z * m->a[2][0]);
-	cp->y = (int )(p->x * m->a[0][1] + p->y * m->a[1][1] + p->z * m->a[2][1]);
-	cp->z = (int )(p->x * m->a[0][2] + p->y * m->a[1][2] + p->z * m->a[2][2]);
+	cp->x = (int )(pnt->x * mat->a[0][0] + pnt->y * mat->a[1][0]
+			+ pnt->z * mat->a[2][0]);
+	cp->y = (int )(pnt->x * mat->a[0][1] + pnt->y * mat->a[1][1]
+			+ pnt->z * mat->a[2][1]);
+	cp->z = (int )(pnt->x * mat->a[0][2] + pnt->y * mat->a[1][2]
+			+ pnt->z * mat->a[2][2]);
 	return (cp);
 }
 
@@ -70,7 +78,7 @@ void	*copy_matrix(void *m)
 	t_matrix	*mat;
 	int			i;
 	int			j;
-	
+
 	if (!m)
 		return (NULL);
 	mat = (t_matrix *)m;
