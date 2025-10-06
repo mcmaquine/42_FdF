@@ -12,12 +12,14 @@ MLX = $(MLX_DIR)/libmlx.a
 
 SRC =	src/fdf.c\
 		src/fdf_utils.c\
-		src/fdf_utils_b.c\
+		src/fdf_utils_a.c\
 		src/fdf_draw_util.c\
+		src/fdf_draw_util_b.c\
 		src/fdf_file_validation.c\
 		src/fdf_math.c\
 		src/fdf_tlinear.c\
 		src/fdf_events.c\
+		src/fdf_events_a.c\
 		src/fdf_scalings.c
 
 OBJ = $(SRC:.c=.o)

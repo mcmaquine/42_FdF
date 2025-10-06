@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:41:49 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/02 17:56:48 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:54:42 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_point	*new_point(int x, int y, int z, __uint32_t color)
 	p->z = z;
 	return (p);
 }
-
+	
 /*
 Create a matrix initilizing its values with zero
 */

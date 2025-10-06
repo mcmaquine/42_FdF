@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf_draw_util_b.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/06 14:21:47 by mmaquine          #+#    #+#             */
+/*   Updated: 2025/10/06 18:26:30 by mmaquine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static void	update(int *error, int *start, int *d, int *step)
@@ -6,7 +18,7 @@ static void	update(int *error, int *start, int *d, int *step)
 	*start = *start + *step;
 }
 
-static void	init_step(int start, int end)
+static int	init_step(int start, int end)
 {
 	if (start < end)
 		return (1);
@@ -22,20 +34,21 @@ void lineDraw(t_window *w, t_point *p0, t_point *p1)
 	int	sy;
 	int	error;
 
+	if (!p0 || !p1 || !w)
+		return ;
 	dx = abs(p1->x - p0->x);
 	dy = -abs(p1->y - p0->y);
 	sx = init_step(p0->x, p1->x);
 	sy = init_step(p0->y, p1->y);
-	while ((p0->x != p1->x1) && (p0->y != p1->y))
+	error = dx + dy;
+	while ((p0->x != p1->x) && (p0->y != p1->y))
 	{
-		paint_pixel()
+		paint_pixel(w, p0->x, p0->y, p0->color);
 		if ((2 * error) >= dy)
-			break ;
-		else
 			update(&error, &(p0->x), &dy, &sx);
 		if ((2 * error) <= dx)
-			break ;
-		else
 			update(&error, &(p0->y), &dx, &sy);
 	}
+	free(p0);
+	free(p1);
 }

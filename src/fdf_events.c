@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:33:02 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/02 12:42:14 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/06 20:16:28 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 static void	scale_image(t_window *w)
 {
-	int			x;
-	int			y;
 	t_matrix	*scaled;
 	t_matrix	*tf;
 
 	scaled = get_scale_mtx(w->curr_scale, w->curr_scale, 1);
 	tf = mult_mat(scaled, w->current_tf);
-	get_figure_center(w, tf, &x, &y);
-	paint_canva(w, tf, x, y);
+	paint_canva_x(w, tf, w->pan_x, w->pan_y);
+	paint_canva_y(w, tf, w->pan_x, w->pan_y);
 	mlx_put_image_to_window(w->mlx, w->win, w->canva.img, 0, 0);
 	free_matrix(scaled);
 	free_matrix(tf);
@@ -42,6 +40,8 @@ int	key_press_event(int keycode, t_window *w)
 {
 	if (keycode == ESC)
 		on_close(w);
+	else
+		pan_event(keycode, w);
 	return (0);
 }
 

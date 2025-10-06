@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:29:10 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/02 17:49:21 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:51:43 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ t_matrix	*mult_mat(t_matrix *a, t_matrix *b)
 	return (c);
 }
 
+/*
+Execute a product of a point p with a matrix m
+Returns the product.
+*/
 void	*mult_point_matrix(void *p, void *m)
 {
 	t_point		*cp;
@@ -65,6 +69,7 @@ void	*mult_point_matrix(void *p, void *m)
 			+ pnt->z * mat->a[2][1]);
 	cp->z = (int )(pnt->x * mat->a[0][2] + pnt->y * mat->a[1][2]
 			+ pnt->z * mat->a[2][2]);
+	cp->color = pnt->color;
 	return (cp);
 }
 

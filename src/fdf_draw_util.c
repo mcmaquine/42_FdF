@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 12:49:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/02 17:10:28 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/06 19:16:31 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void	paint_pixel(t_window *w, int x, int y, unsigned int color)
 	}
 }
 
+/*
+Clear canva writing color black on every pixel.
+*/
 void	clear_canva(t_window *w)
 {
 	int	x;
@@ -50,62 +53,54 @@ void	clear_canva(t_window *w)
 /*
 Work in progress.
 */
-void	paint_canva(t_window *w, t_matrix *tf, int x, int y)
+void	paint_canva_x(t_window *w, t_matrix *tf, int x, int y)
 {
-	t_list	*lst;
-	t_point	*p;
+	t_point	*p0;
+	t_point	*p1;
+	t_point	*p0tf;
+	t_point	*p1tf;
 
-	lst = w->lpts;
-	while (lst)
+	p0 = NULL;
+	p1 = NULL;
+	get_two_points_horizontal(w, &p0, &p1);
+	while (p0 || p1)
 	{
-		p = mult_point_matrix((t_point *)lst->content, tf);
-		p->color = ((t_point *)lst->content)->color;
-		paint_pixel(w, p->x + w->width/2 - x, p->y + w->height/2 - y, p->color);
-		free(p);
-		lst = lst->next;
+		p0tf = mult_point_matrix(p0, tf);
+		p1tf = mult_point_matrix(p1, tf);
+		if (p0tf && p1tf)
+		{
+			p0tf->x += p0tf->x + w->width/2 - x;
+			p0tf->y += p0tf->y + w->height/2 - y;
+			p1tf->x += p1tf->x + w->width/2 - x;
+			p1tf->y += p1tf->y + w->height/2 - y;
+			lineDraw(w, p0tf, p1tf);
+		}
+		get_two_points_horizontal(w, &p0, &p1);
 	}
 }
-/*
-Copy content from point p to a new point.
-Returns address to new point.
-*/
-void	*copy_point(void *p)
-{
-	t_point	*copy;
-	t_point	*point;
 
-	if (!p)
-		return (NULL);
-	point = (t_point *)p;
-	copy = ft_calloc(1, sizeof(t_point));
-	if (!copy)
-		return (NULL);
-	copy->x = point->x;
-	copy->y = point->y;
-	copy->z = point->z;
-	copy->color = point->color;
-	return (copy);
-}
-/*
-	Draw a circle centered on screen
-	radius is in pixels.
-void	draw_circle(int radius, t_window *wind)
+void	paint_canva_y(t_window *w, t_matrix *tf, int x, int y)
 {
-	float	theta;
-	float	dtheta = 2 * M_PI / wind->canva.line_length;
-	int		x;
-	int		y;
-	
-	theta = 0.0;
-	while (theta < 2 * M_PI)
+	t_point	*p0;
+	t_point	*p1;
+	t_point	*p0tf;
+	t_point	*p1tf;
+
+	p0 = NULL;
+	p1 = NULL;
+	get_two_points_vertical(w, &p0, &p1);
+	while (p0 || p1)
 	{
-		x = (int)radius * cos(theta);
-		y = (int)radius * sin(theta);
-		theta += dtheta;
-		//x = x - wind->width/2;
-		//y = wind->height/2 - y;
-		paint_pixel(wind, x - wind->width/2, wind->height/2 - y, 0xFFFFFF);
-		rotate_about_x(&y, 45*M_PI/180.0);
-		paint_pixel(wind, x - wind->width/2, wind->height/2 - y, 0x007df9);
+		p0tf = mult_point_matrix(p0, tf);
+		p1tf = mult_point_matrix(p1, tf);
+		if (p0tf && p1tf)
+		{
+			p0tf->x += p0tf->x + w->width/2 - x;
+			p0tf->y += p0tf->y + w->height/2 - y;
+			p1tf->x += p1tf->x + w->width/2 - x;
+			p1tf->y += p1tf->y + w->height/2 - y;
+			lineDraw(w, p0tf, p1tf);
+		}
+		get_two_points_vertical(w, &p0, &p1);
 	}
-}*/
+}
