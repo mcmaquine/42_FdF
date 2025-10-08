@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 12:49:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/06 19:16:31 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/08 19:03:49 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,6 @@ void	paint_pixel(t_window *w, int x, int y, unsigned int color)
 }
 
 /*
-Clear canva writing color black on every pixel.
-*/
-void	clear_canva(t_window *w)
-{
-	int	x;
-	int	y;
-
-	x = -1;
-	while (++x < w->width)
-	{
-		y = -1;
-		while (++y < w->height)
-			paint_pixel(w, x, y, 0);
-	}
-}
-
-/*
 Work in progress.
 */
 void	paint_canva_x(t_window *w, t_matrix *tf, int x, int y)
@@ -59,23 +42,24 @@ void	paint_canva_x(t_window *w, t_matrix *tf, int x, int y)
 	t_point	*p1;
 	t_point	*p0tf;
 	t_point	*p1tf;
+	int		yx[2];
 
-	p0 = NULL;
-	p1 = NULL;
-	get_two_points_horizontal(w, &p0, &p1);
-	while (p0 || p1)
+	yx[0] = -1;
+	while (++yx[0] < w->data.ordinate)
 	{
-		p0tf = mult_point_matrix(p0, tf);
-		p1tf = mult_point_matrix(p1, tf);
-		if (p0tf && p1tf)
+		yx[1] = -1;
+		while (++yx[1] < w->data.abscissa - 1)
 		{
-			p0tf->x += p0tf->x + w->width/2 - x;
-			p0tf->y += p0tf->y + w->height/2 - y;
-			p1tf->x += p1tf->x + w->width/2 - x;
-			p1tf->y += p1tf->y + w->height/2 - y;
+			p0 = set_point(yx[1], yx[0], w->data.coord[yx[0]][yx[1]], w->data.color[yx[0]][yx[1]]);
+			p1 = set_point(yx[1] + 1, yx[0], w->data.coord[yx[0]][yx[1] + 1], w->data.color[yx[0]][yx[1] + 1]);
+			p0tf = mult_point_matrix(p0, tf);
+			p1tf = mult_point_matrix(p1, tf);
+			edit_point(p0tf, w->width/2 - x, w->height/2 - y, 0);
+			edit_point(p1tf, w->width/2 - x, w->height/2 - y, 0);
 			lineDraw(w, p0tf, p1tf);
+			free(p0);
+			free(p1);
 		}
-		get_two_points_horizontal(w, &p0, &p1);
 	}
 }
 
@@ -85,22 +69,25 @@ void	paint_canva_y(t_window *w, t_matrix *tf, int x, int y)
 	t_point	*p1;
 	t_point	*p0tf;
 	t_point	*p1tf;
+	int		yx[2];
 
-	p0 = NULL;
-	p1 = NULL;
-	get_two_points_vertical(w, &p0, &p1);
-	while (p0 || p1)
+	yx[1] = -1;
+	while (++yx[1] < w->data.abscissa)
 	{
-		p0tf = mult_point_matrix(p0, tf);
-		p1tf = mult_point_matrix(p1, tf);
-		if (p0tf && p1tf)
+		yx[0] = -1;
+		while (++yx[0] < w->data.ordinate - 1)
 		{
-			p0tf->x += p0tf->x + w->width/2 - x;
-			p0tf->y += p0tf->y + w->height/2 - y;
-			p1tf->x += p1tf->x + w->width/2 - x;
-			p1tf->y += p1tf->y + w->height/2 - y;
+			p0 = set_point(yx[1], yx[0], w->data.coord[yx[0]][yx[1]],
+					w->data.color[yx[0]][yx[1]]);
+			p1 = set_point(yx[1], yx[0] + 1, w->data.coord[yx[0] + 1][yx[1]],
+					w->data.color[yx[0] + 1][yx[1]]);
+			p0tf = mult_point_matrix(p0, tf);
+			p1tf = mult_point_matrix(p1, tf);
+			edit_point(p0tf, w->width/2 - x, w->height/2 - y, 0);
+			edit_point(p1tf, w->width/2 - x, w->height/2 - y, 0);
 			lineDraw(w, p0tf, p1tf);
+			free(p0);
+			free(p1);
 		}
-		get_two_points_vertical(w, &p0, &p1);
 	}
 }

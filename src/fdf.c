@@ -6,40 +6,44 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:40:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/06 20:07:52 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/08 17:41:22 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
-void	fdf_usage(void)
+int	fdf_usage(void)
 {
 	ft_printf("\t\t\tFdf program usage:\n");
 	ft_printf("\t\t\t./fdf <map_file>.fdf\n");
+	return (0);
 }
 
 int	file_input_validations(t_window *w, int argc, char **argv)
 {
 	int	fd;
 
-	w->lpts = NULL;
 	if (argc < 2)
-	{
-		fdf_usage();
-		return (0);
-	}
+		return (fdf_usage());
 	fd = open(argv[1], O_RDONLY);
-	close(fd);
 	if (fd < 3)
 	{
+		close(fd);
 		ft_printf("Error opening file\n");
 		return (0);
 	}
-	if (!read_points(argv[1], w))
+	else
 	{
-		ft_printf("File cannot be loaded\n");
-		return (0);
+		w->data.ordinate = 0;
+		w->data.abscissa = validate_file(fd, &(w->data.ordinate));
+		if (!w->data.abscissa)
+		{
+			ft_printf("File cannot be loaded\n");
+			return (0);
+		}
+		else
+			read_points(argv[1], w);
 	}
 	return (1);
 }
@@ -47,7 +51,6 @@ int	file_input_validations(t_window *w, int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_window	w;
-	int	x;
 	t_matrix	*m, *ms, *tf;
 
 	w.height = 720;
@@ -56,30 +59,30 @@ int	main(int argc, char **argv)
 	ms = get_scale_mtx(10, 10, 10);
 	tf = mult_mat(ms, m);
 	file_input_validations(&w, argc, argv);
-	x = get_max_scalings(&w, tf);
-	ft_printf("Scaling x: %d\n", x);
-	ft_lstclear(&(w.lpts), free_points);
+	for (int y = 0; y < w.data.ordinate; y++)
+	{
+		for (int x = 0; x < w.data.abscissa; x++)
+			ft_printf("%d ", w.data.coord[y][x]);
+		ft_printf("\n");
+	}
+	free_data(&w);
 	free_matrix(m);
 	free_matrix(ms);
 	free_matrix(tf);
 }*/
 
-static void	start_draw(t_window *w)
+void	start_draw(t_window *w)
 {
 	t_matrix	*scaled;
 	t_matrix	*m;
-	int			x;
-	int			y;
 
 	w->current_tf = get_isometric_mtx_tf();
 	w->curr_scale = 10.0;
 	scaled = get_scale_mtx(w->curr_scale,w->curr_scale, w->curr_scale);
 	m = mult_mat(scaled, w->current_tf);
-	get_figure_center(w, m, &x, &y);
-	w->pan_x = x;
-	w->pan_y = y;
-	paint_canva_x(w, m, x, y);
-	paint_canva_y(w, m, x, y);
+	get_figure_center(w, m, &(w->pan_x), &(w->pan_y));
+	paint_canva_x(w, m, w->pan_x, w->pan_y);
+	paint_canva_y(w, m, w->pan_x, w->pan_y);
 	mlx_put_image_to_window(w->mlx, w->win, w->canva.img, 0, 0);
 	free_matrix(scaled);
 	free_matrix(m);

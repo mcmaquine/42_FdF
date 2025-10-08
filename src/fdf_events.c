@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:33:02 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/06 20:16:28 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/07 15:52:05 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	scale_image(t_window *w)
 
 static void	free_memory(t_window *w)
 {
-	ft_lstclear(&(w->lpts), free_points);
+	free_data(w);
 	free_matrix(w->current_tf);
 	mlx_destroy_image(w->mlx, w->canva.img);
 	mlx_destroy_window(w->mlx, w->win);
