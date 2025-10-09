@@ -5,88 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 14:58:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/02 16:58:47 by mmaquine         ###   ########.fr       */
+/*   Created: 2025/10/09 15:31:40 by mmaquine          #+#    #+#             */
+/*   Updated: 2025/10/09 15:47:59 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*
-Return a scale matrix for 3 axes.
-kx: scale factor to x coordinates.
-ky: scale factor to y coordinates.
-kz: scale factor to z coordinates.
-Returns a scale matrix 3,3.
+Same transform apllied on dimetric and isometric transform
 */
-t_matrix	*get_scale_mtx(double kx, double ky, double kz)
+static void	*standard_transform(void)
 {
-	t_matrix	*sm;
+	t_matrix	*mat_1;
+	t_matrix	*mat_2;
+	t_matrix	*mat_3;
 
-	sm = create_matrix(3, 3);
-	if (!sm)
-		return (NULL);
-	sm->a[0][0] = kx;
-	sm->a[1][1] = ky;
-	sm->a[2][2] = kz;
-	return (sm);
-}
-
-/*
-Return a rotate matrix around x axis
-theta: angle in radians
-*/
-t_matrix	*get_rotate_mtx_x(double theta)
-{
-	t_matrix	*sm;
-
-	sm = create_matrix(3, 3);
-	if (!sm)
-		return (NULL);
-	sm->a[0][0] = 1.0;
-	sm->a[1][1] = cos(theta);
-	sm->a[1][2] = sin(theta);
-	sm->a[2][1] = -sin(theta);
-	sm->a[2][2] = cos(theta);
-	return (sm);
-}
-
-/*
-Return a rotate matrix around y axis
-theta: angle in radians
-*/
-t_matrix	*get_rotate_mtx_y(double theta)
-{
-	t_matrix	*sm;
-
-	sm = create_matrix(3, 3);
-	if (!sm)
-		return (NULL);
-	sm->a[0][0] = cos(theta);
-	sm->a[0][2] = -sin(theta);
-	sm->a[1][1] = 1.0;
-	sm->a[2][0] = sin(theta);
-	sm->a[2][2] = cos(theta);
-	return (sm);
-}
-
-/*
-Return a rotate matrix around z axis
-theta: angle in radians
-*/
-t_matrix	*get_rotate_mtx_z(double theta)
-{
-	t_matrix	*sm;
-
-	sm = create_matrix(3, 3);
-	if (!sm)
-		return (NULL);
-	sm->a[0][0] = cos(theta);
-	sm->a[0][1] = sin(theta);
-	sm->a[1][0] = -sin(theta);
-	sm->a[1][1] = cos(theta);
-	sm->a[2][2] = 1.0;
-	return (sm);
+	mat_1 = get_rotate_mtx_x(-M_PI / 2);
+	mat_2 = get_scale_mtx(1, 1, -1);
+	mat_3 = mult_mat(mat_2, mat_1);
+	free_matrix(mat_1);
+	free_matrix(mat_2);
+	return (mat_3);
 }
 
 /*
@@ -105,13 +45,27 @@ t_matrix	*get_isometric_mtx_tf(void)
 	mat_3 = mult_mat(mat_1, mat_2);
 	free_matrix(mat_1);
 	free_matrix(mat_2);
-	mat_1 = get_rotate_mtx_x(-M_PI / 2);
+	mat_1 = standard_transform();
 	mat_2 = mult_mat(mat_1, mat_3);
-	free_matrix(mat_1);
-	free_matrix(mat_3);
-	mat_1 = get_scale_mtx(1, 1, -1);
+	free(mat_1);
+	free(mat_3);
+	return (mat_2);
+}
+
+t_matrix	*get_dimetric_mtx_tf()
+{
+	t_matrix	*mat_1;
+	t_matrix	*mat_2;
+	t_matrix	*mat_3;
+
+	mat_2 = get_rotate_mtx_x(M_PI / 6);
+	mat_1 = get_rotate_mtx_y(M_PI / 4);
 	mat_3 = mult_mat(mat_1, mat_2);
 	free_matrix(mat_1);
 	free_matrix(mat_2);
-	return (mat_3);
+	mat_1 = standard_transform();
+	mat_2 = mult_mat(mat_1, mat_3);
+	free(mat_1);
+	free(mat_3);
+	return (mat_2);
 }

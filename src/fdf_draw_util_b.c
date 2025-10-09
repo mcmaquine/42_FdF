@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:21:47 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/08 19:29:28 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/09 16:31:31 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	update(int *error, int *start, int *d, int *step)
 	*start = *start + *step;
 }
 
-static int	init_step(int start, int end)
+static int	init_step(int *start, int *end)
 {
-	if (start < end)
+	if (*start < *end)
 		return (1);
 	else
 		return (-1);
@@ -38,8 +38,8 @@ void lineDraw(t_window *w, t_point *p0, t_point *p1)
 		return ;
 	dx = abs(p1->x - p0->x);
 	dy = -abs(p1->y - p0->y);
-	sx = init_step(p0->x, p1->x);
-	sy = init_step(p0->y, p1->y);
+	sx = init_step(&(p0->x), &(p1->x));
+	sy = init_step(&(p0->y), &(p1->y));
 	error[0] = dx + dy;
 	while ((p0->x != p1->x) && (p0->y != p1->y))
 	{
@@ -59,14 +59,15 @@ Clear canva writing color black on every pixel.
 */
 void	clear_canva(t_window *w)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	t_point	*p;
 
 	x = -1;
 	while (++x < w->width)
 	{
 		y = -1;
 		while (++y < w->height)
-			paint_pixel(w, x, y, 0);
+			paint_pixel(x, y, 0, 0);
 	}
 }

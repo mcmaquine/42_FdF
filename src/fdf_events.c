@@ -6,18 +6,18 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:33:02 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/07 15:52:05 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/09 10:19:44 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	scale_image(t_window *w)
+void	scale_image(t_window *w)
 {
 	t_matrix	*scaled;
 	t_matrix	*tf;
 
-	scaled = get_scale_mtx(w->curr_scale, w->curr_scale, 1);
+	scaled = get_scale_mtx(w->curr_scale, w->curr_scale, w->curr_scale);
 	tf = mult_mat(scaled, w->current_tf);
 	paint_canva_x(w, tf, w->pan_x, w->pan_y);
 	paint_canva_y(w, tf, w->pan_x, w->pan_y);

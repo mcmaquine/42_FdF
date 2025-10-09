@@ -6,12 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:40:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/08 17:41:22 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/09 16:06:14 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 int	fdf_usage(void)
 {
@@ -59,17 +58,12 @@ int	main(int argc, char **argv)
 	ms = get_scale_mtx(10, 10, 10);
 	tf = mult_mat(ms, m);
 	file_input_validations(&w, argc, argv);
-	for (int y = 0; y < w.data.ordinate; y++)
-	{
-		for (int x = 0; x < w.data.abscissa; x++)
-			ft_printf("%d ", w.data.coord[y][x]);
-		ft_printf("\n");
-	}
 	free_data(&w);
 	free_matrix(m);
 	free_matrix(ms);
 	free_matrix(tf);
-}*/
+}
+*/
 
 void	start_draw(t_window *w)
 {

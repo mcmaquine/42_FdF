@@ -17,6 +17,7 @@ SRC =	src/fdf.c\
 		src/fdf_draw_util_b.c\
 		src/fdf_file_validation.c\
 		src/fdf_math.c\
+		src/fdf_tlinear_util.c\
 		src/fdf_tlinear.c\
 		src/fdf_events.c\
 		src/fdf_events_a.c\
