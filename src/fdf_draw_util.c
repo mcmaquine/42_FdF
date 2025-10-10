@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 12:49:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/09 16:43:13 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:42:57 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,20 +89,5 @@ void	paint_canva_y(t_window *w, t_matrix *tf, int x, int y)
 			free(p0);
 			free(p1);
 		}
-	}
-}
-
-void	paint_linear(t_window *w, t_point *p0, t_point *p1)
-{
-	static char	step_r;
-	static char	step_g;
-	static char	step_b;
-
-	if ((p0->x == p1->x) && (p0->y == p1->y))
-	{
-		step_r = 0;
-		step_g = 0;
-		step_b = 0;
-		paint_pixel(w, p0->x, p0->y, p1->color);
 	}
 }

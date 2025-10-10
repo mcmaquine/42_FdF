@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 15:31:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/09 15:47:59 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/10 15:53:28 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ t_matrix	*get_isometric_mtx_tf(void)
 	free_matrix(mat_2);
 	mat_1 = standard_transform();
 	mat_2 = mult_mat(mat_1, mat_3);
-	free(mat_1);
-	free(mat_3);
+	free_matrix(mat_1);
+	free_matrix(mat_3);
 	return (mat_2);
 }
 
@@ -65,7 +65,7 @@ t_matrix	*get_dimetric_mtx_tf()
 	free_matrix(mat_2);
 	mat_1 = standard_transform();
 	mat_2 = mult_mat(mat_1, mat_3);
-	free(mat_1);
-	free(mat_3);
+	free_matrix(mat_1);
+	free_matrix(mat_3);
 	return (mat_2);
 }

@@ -6,13 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 16:15:44 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/08 18:29:56 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/10 11:09:48 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	get_figure_center(t_window *w, t_matrix *tf, int *c_x, int *c_y)
+void	get_figure_center(t_window *w, t_matrix *tf, int *cx, int *cy)
 {
 	int		i;
 	int		j;
@@ -29,13 +29,13 @@ void	get_figure_center(t_window *w, t_matrix *tf, int *c_x, int *c_y)
 		{
 			p0 = set_point(i, j, w->data.coord[j][i], 0);
 			p = mult_point_matrix(p0, tf);
-			*c_x += p->x;
-			*c_y += p->y;
+			*cx += p->x;
+			*cy += p->y;
 			total++;
 			free(p);
 			free(p0);
 		}
 	}
-	*c_x = *c_x / total;
-	*c_y = *c_y / total;
+	*cx = *cx / total;
+	*cy = *cy / total;
 }

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:57:33 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/09 17:44:56 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/10 14:18:12 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@
 
 typedef struct s_color
 {
-	float	step_r;
-	float	step_g;
-	float	step_b;
-	int		start_r;
-	int		start_g;
-	int		start_b;
+	double	step_tpcy;
+	double	step_r;
+	double	step_g;
+	double	step_b;
+	double	tpcy;
+	double	red;
+	double	green;
+	double	blue;
 }	t_color;
 
 typedef	struct s_data
@@ -84,41 +86,47 @@ typedef struct s_window
 }	t_window;
 
 //utils
-__uint32_t	atoi_16(char *ptr);
-t_point		*new_point(int x, int y, int z, __uint32_t color);
-void		*create_matrix(int rows, int cols);
-void		free_matrix(t_matrix *m);
-void		*copy_point(void *p);
-void		*set_point(int x, int y, int z, unsigned int color);
-void		edit_point(t_point *p, int x, int y, int z);
+__uint32_t		atoi_16(char *ptr);
+t_point			*new_point(int x, int y, int z, __uint32_t color);
+void			*create_matrix(int rows, int cols);
+void			free_matrix(t_matrix *m);
+void			*copy_point(void *p);
+void			*set_point(int x, int y, int z, unsigned int color);
+void			edit_point(t_point *p, int x, int y, int z);
 //draw functions
-void		paint_pixel(t_window *w, int x, int y, unsigned int color);
-void		*create_window(t_window *wind, int width, int height);
-void		paint_canva_x(t_window *w, t_matrix *tf, int x, int y);
-void		paint_canva_y(t_window *w, t_matrix *tf, int x, int y);
-void		clear_canva(t_window *w);
-void		lineDraw(t_window *w, t_point *p0, t_point *p1);
+void			paint_pixel(t_window *w, int x, int y, unsigned int color);
+void			*create_window(t_window *wind, int width, int height);
+void			paint_canva_x(t_window *w, t_matrix *tf, int x, int y);
+void			paint_canva_y(t_window *w, t_matrix *tf, int x, int y);
+void			clear_canva(t_window *w);
+void			lineDraw(t_window *w, t_point *p0, t_point *p1);
 //file input validation
-int			validate_file(int fd, int *rows);
-void		validate_element(char **spl, int y, t_window *w);
-int			read_points(char *file_name, t_window *w);
-void		free_data(t_window *w);
+int				validate_file(int fd, int *rows);
+void			validate_element(char **spl, int y, t_window *w);
+int				read_points(char *file_name, t_window *w);
+void			free_data(t_window *w);
 // math utils
-t_matrix	*mult_mat(t_matrix *a, t_matrix *b);
-void		*mult_point_matrix(void *p, void *m);
-void		*copy_matrix(void *m);
+t_matrix		*mult_mat(t_matrix *a, t_matrix *b);
+void			*mult_point_matrix(void *p, void *m);
+void			*copy_matrix(void *m);
 // transformation matrixes and scalings
-t_matrix	*get_scale_mtx(double kx, double ky, double kz);
-t_matrix	*get_rotate_mtx_x(double theta);
-t_matrix	*get_rotate_mtx_y(double theta);
-t_matrix	*get_rotate_mtx_z(double theta);
-t_matrix	*get_isometric_mtx_tf(void);
-void		get_figure_center(t_window *w, t_matrix *tf, int *c_x, int *c_y);
-t_matrix	*get_dimetric_mtx_tf();
+t_matrix		*get_scale_mtx(double kx, double ky, double kz);
+t_matrix		*get_rotate_mtx_x(double theta);
+t_matrix		*get_rotate_mtx_y(double theta);
+t_matrix		*get_rotate_mtx_z(double theta);
+t_matrix		*get_isometric_mtx_tf(void);
+void			get_figure_center(t_window *w, t_matrix *tf, int *cx, int *cy);
+t_matrix		*get_dimetric_mtx_tf();
 // window events
-int			key_press_event(int keycode, t_window *w);
-int			pan_event(int keycode, t_window *w);
-int			on_close(t_window *w);
-int			mouse_hook(int button, int x, int y, t_window *w);
-void		scale_image(t_window *w);
+int				key_press_event(int keycode, t_window *w);
+int				pan_event(int keycode, t_window *w);
+int				on_close(t_window *w);
+int				mouse_hook(int button, int x, int y, t_window *w);
+void			scale_image(t_window *w);
+//color utils
+unsigned char	get_transparency(unsigned int color);
+unsigned char	get_red(unsigned int color);
+unsigned char	get_green(unsigned int color);
+unsigned char	get_blue(unsigned int color);
+unsigned int	set_color(int t, int r, int g, int b);
 #endif

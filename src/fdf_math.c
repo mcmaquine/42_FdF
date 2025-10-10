@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:29:10 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/06 16:51:43 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/10 14:55:46 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,44 @@ void	*copy_matrix(void *m)
 			copy->a[i][j] = mat->a[i][j];
 	}
 	return (copy);
+}
+
+/*
+Create a matrix initilizing its values with zero
+*/
+void	*create_matrix(int rows, int cols)
+{
+	int			i;
+	t_matrix	*m;
+
+	if (!rows || !cols)
+		return (NULL);
+	m = ft_calloc(1, sizeof(t_matrix));
+	if (!m)
+		return (NULL);
+	m->a = ft_calloc(rows, sizeof(double *));
+	if (!m->a)
+		return (NULL);
+	i = -1;
+	while (++i < rows)
+		m->a[i] = ft_calloc(cols, sizeof(double));
+	m->col = cols;
+	m->row = rows;
+	return (m);
+}
+
+void	free_matrix(t_matrix *m)
+{
+	int	i;
+
+	if (!m)
+		return ;
+	i = 0;
+	while (i < m->row)
+	{
+		free(m->a[i]);
+		i++;
+	}
+	free(m->a);
+	free(m);
 }
