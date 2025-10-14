@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 12:49:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/10 16:42:57 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:53:51 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ void	paint_canva_x(t_window *w, t_matrix *tf, int x, int y)
 		yx[1] = -1;
 		while (++yx[1] < w->data.abscissa - 1)
 		{
-			p0 = set_point(yx[1], yx[0], w->data.coord[yx[0]][yx[1]], w->data.color[yx[0]][yx[1]]);
-			p1 = set_point(yx[1] + 1, yx[0], w->data.coord[yx[0]][yx[1] + 1], w->data.color[yx[0]][yx[1] + 1]);
+			p0 = set_point(yx[1], yx[0], w->data.coord[yx[0]][yx[1]],
+				w->data.color[yx[0]][yx[1]]);
+			p1 = set_point(yx[1] + 1, yx[0], w->data.coord[yx[0]][yx[1] + 1],
+				w->data.color[yx[0]][yx[1] + 1]);
  			p0tf = mult_point_matrix(p0, tf);
 			p1tf = mult_point_matrix(p1, tf);
 			edit_point(p0tf, w->width/2 - x, w->height/2 - y, 0);

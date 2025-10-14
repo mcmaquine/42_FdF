@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:57:33 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/10 14:18:12 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/14 08:36:03 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ t_matrix		*get_scale_mtx(double kx, double ky, double kz);
 t_matrix		*get_rotate_mtx_x(double theta);
 t_matrix		*get_rotate_mtx_y(double theta);
 t_matrix		*get_rotate_mtx_z(double theta);
-t_matrix		*get_isometric_mtx_tf(void);
+t_matrix		*get_isometric_mtx_tf(int orientation);
 void			get_figure_center(t_window *w, t_matrix *tf, int *cx, int *cy);
-t_matrix		*get_dimetric_mtx_tf();
+t_matrix		*get_dimetric_mtx_tf(void);
 // window events
 int				key_press_event(int keycode, t_window *w);
 int				pan_event(int keycode, t_window *w);

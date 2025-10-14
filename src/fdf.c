@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:40:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/10 16:07:23 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/14 08:38:20 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ void	start_draw(t_window *w)
 	t_matrix	*scaled;
 	t_matrix	*m;
 
-	w->current_tf = get_isometric_mtx_tf();
+	w->current_tf = get_isometric_mtx_tf(0);
 	w->curr_scale = 10.0;
 	scaled = get_scale_mtx(w->curr_scale,w->curr_scale, w->curr_scale);
 	m = mult_mat(scaled, w->current_tf);
 	get_figure_center(w, m, &(w->pan_x), &(w->pan_y));
 	paint_canva_x(w, m, w->pan_x, w->pan_y);
-	// paint_canva_y(w, m, w->pan_x, w->pan_y);
+	paint_canva_y(w, m, w->pan_x, w->pan_y);
 	mlx_put_image_to_window(w->mlx, w->win, w->canva.img, 0, 0);
 	free_matrix(scaled);
 	free_matrix(m);

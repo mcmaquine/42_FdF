@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 15:31:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/10 15:53:28 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/14 08:35:44 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	*standard_transform(void)
 /*
 Return a matrix which transforms a view into isometric form.
 */
-t_matrix	*get_isometric_mtx_tf(void)
+t_matrix	*get_isometric_mtx_tf(int orientation)
 {
 	double		deg_rot_x;
 	t_matrix	*mat_1;
@@ -41,7 +41,7 @@ t_matrix	*get_isometric_mtx_tf(void)
 
 	deg_rot_x = atan(1 / sqrt(2));
 	mat_2 = get_rotate_mtx_x(deg_rot_x);
-	mat_1 = get_rotate_mtx_y(M_PI / 4);
+	mat_1 = get_rotate_mtx_y(M_PI / 4 + orientation * M_PI / 2);
 	mat_3 = mult_mat(mat_1, mat_2);
 	free_matrix(mat_1);
 	free_matrix(mat_2);
