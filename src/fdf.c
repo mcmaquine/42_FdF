@@ -6,12 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:40:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/15 20:03:06 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/16 08:25:46 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 int	fdf_usage(void)
 {
@@ -35,7 +34,6 @@ int	file_input_validations(t_window *w, int argc, char **argv)
 	}
 	else
 	{
-		ft_printf("\tvalidating file...\n");
 		w->data.ordinate = 0;
 		w->data.abscissa = validate_file(fd, &(w->data.ordinate));
 		if (!w->data.abscissa)
@@ -44,10 +42,7 @@ int	file_input_validations(t_window *w, int argc, char **argv)
 			return (0);
 		}
 		else
-		{
-			ft_printf("\treading points...\n");
 			read_points(argv[1], w);
-		}
 	}
 	return (1);
 }
@@ -82,10 +77,9 @@ void	start_draw(t_window *w)
 	w->curr_scale = get_max_scaling(w);
 	ft_printf("get scalings...\n");
 	scaled = get_scale_mtx(w->curr_scale,w->curr_scale, 0.4 * w->curr_scale);
-	printf("%f\n", w->curr_scale);
 	m = mult_mat(scaled, w->current_tf);
 	get_figure_center(w, m, &(w->pan_x), &(w->pan_y));
-	ft_printf("drawing...");
+	ft_printf("drawing...\n");
 	paint_canva_x(w, m, w->pan_x, w->pan_y);
 	paint_canva_y(w, m, w->pan_x, w->pan_y);
 	mlx_put_image_to_window(w->mlx, w->win, w->canva.img, 0, 0);

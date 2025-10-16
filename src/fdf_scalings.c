@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 16:15:44 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/15 19:44:46 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:44:50 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ double	get_max_scaling(t_window *w)
 	range_y[1] = range_y[0];
 	m = get_scaled_isometric();
 	scaling_compare(w, m, range_x, range_y);
-	ft_printf("%d %d %d %d\n", range_x[0], range_x[1], range_y[0], range_y[1]);
 	range_x[0] = (double)(w->width / (range_x[1] - range_x[0]));
 	range_y[0] = (double)(w->height / (range_y[1] - range_y[0]));
 	free_matrix(m);
-	ft_printf("%d %d\n", range_x[0], range_y[0]);
-	if (range_x[0] < range_y[0])
+	if (range_x[0] > range_y[0])
+		range_x[0] = range_y[0];
+	if (range_x[0] > 5.0)
 		return (range_x[0]);
 	else
-		return (range_y[0]);
+		return (5.0);
 }
