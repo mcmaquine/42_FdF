@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   fdf_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/02 12:40:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/15 20:03:06 by mmaquine         ###   ########.fr       */
+/*   Created: 2025/10/15 15:32:56 by mmaquine          #+#    #+#             */
+/*   Updated: 2025/10/15 16:34:47 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include <stdio.h>
+#include "fdf_bonus.h"
 
 int	fdf_usage(void)
 {
@@ -35,7 +34,6 @@ int	file_input_validations(t_window *w, int argc, char **argv)
 	}
 	else
 	{
-		ft_printf("\tvalidating file...\n");
 		w->data.ordinate = 0;
 		w->data.abscissa = validate_file(fd, &(w->data.ordinate));
 		if (!w->data.abscissa)
@@ -44,10 +42,7 @@ int	file_input_validations(t_window *w, int argc, char **argv)
 			return (0);
 		}
 		else
-		{
-			ft_printf("\treading points...\n");
 			read_points(argv[1], w);
-		}
 	}
 	return (1);
 }
@@ -65,7 +60,7 @@ int	main(int argc, char **argv)
 	// ms = get_scale_mtx(10, 10, 10);
 	//tf = mult_mat(ms, m);
 	file_input_validations(&w, argc, argv);
-	// ft_printf("%X", set_color(0, 0, 0, 0xFF));
+	// ft_printf("%X", set_color(0, 0, 0, 0xFF));#ifndef FDF_H
 	free_data(&w);
 	free_matrix(m);
 	// free_matrix(ms);
@@ -79,13 +74,10 @@ void	start_draw(t_window *w)
 	t_matrix	*m;
 
 	w->current_tf = get_isometric_mtx_tf(0);
-	w->curr_scale = get_max_scaling(w);
-	ft_printf("get scalings...\n");
-	scaled = get_scale_mtx(w->curr_scale,w->curr_scale, 0.4 * w->curr_scale);
-	printf("%f\n", w->curr_scale);
+	w->curr_scale = 10.0;
+	scaled = get_scale_mtx(w->curr_scale,w->curr_scale, w->curr_scale);
 	m = mult_mat(scaled, w->current_tf);
 	get_figure_center(w, m, &(w->pan_x), &(w->pan_y));
-	ft_printf("drawing...");
 	paint_canva_x(w, m, w->pan_x, w->pan_y);
 	paint_canva_y(w, m, w->pan_x, w->pan_y);
 	mlx_put_image_to_window(w->mlx, w->win, w->canva.img, 0, 0);
@@ -98,7 +90,6 @@ int	main(int argc, char **argv)
 	t_window	wind;
 	int			valid;
 
-	ft_printf("fetching file...\n");
 	valid = file_input_validations(&wind, argc, argv);
 	if (!valid)
 		return (0);
@@ -108,7 +99,8 @@ int	main(int argc, char **argv)
 			&wind.canva.bits_per_pixel, &wind.canva.line_length,
 			&wind.canva.endian);
 	start_draw(&wind);
-	mlx_hook(wind.win, 17, 0, on_close, &wind);
 	mlx_hook(wind.win, 2, 1L << 0, key_press_event, &wind);
+	mlx_hook(wind.win, 17, 0, on_close, &wind);
+	mlx_mouse_hook(wind.win, mouse_hook, &wind);
 	mlx_loop(wind.mlx);
 }

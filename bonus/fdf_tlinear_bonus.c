@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_tlinear.c                                      :+:      :+:    :+:   */
+/*   fdf_tlinear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 15:31:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/15 10:14:55 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/15 17:13:34 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 /*
 Same transform apllied on dimetric and isometric transform

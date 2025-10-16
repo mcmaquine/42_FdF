@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/22 11:57:33 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/15 19:39:36 by mmaquine         ###   ########.fr       */
+/*   Created: 2025/10/15 15:33:52 by mmaquine          #+#    #+#             */
+/*   Updated: 2025/10/15 15:34:06 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 # include <math.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
@@ -20,6 +20,12 @@
 #  define M_PI 3.14159265358979323846
 # endif
 # define ESC 65307
+# define MOUSE_SCR_UP 4
+# define MOUSE_SCR_DOWN 5
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
 
 typedef struct s_color
 {
@@ -109,12 +115,13 @@ t_matrix		*get_rotate_mtx_x(double theta);
 t_matrix		*get_rotate_mtx_y(double theta);
 t_matrix		*get_rotate_mtx_z(double theta);
 t_matrix		*get_isometric_mtx_tf(double orientation);
-t_matrix		*get_dimetric_mtx_tf(void);
 void			get_figure_center(t_window *w, t_matrix *tf, int *cx, int *cy);
-double			get_max_scaling(t_window *w);
+t_matrix		*get_dimetric_mtx_tf(void);
 // window events
 int				key_press_event(int keycode, t_window *w);
+int				pan_event(int keycode, t_window *w);
 int				on_close(t_window *w);
+int				mouse_hook(int button, int x, int y, t_window *w);
 void			scale_image(t_window *w);
 //color utils
 unsigned char	get_transparency(unsigned int color);
