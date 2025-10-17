@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:40:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/17 08:57:55 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/17 13:10:36 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ int	main(int argc, char **argv)
 
 	int fd = open(argv[1], O_RDONLY);
 	line = read_file(fd);
-	ft_printf("%s", line);
+	ft_printf("Counting...\n");
+	int n = count(line, 10);
+	ft_printf("%d\n", n);
 	close(fd);
 	free(line);
 }

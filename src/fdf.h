@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:57:33 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/17 08:53:10 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/17 13:03:42 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ unsigned char	get_red(unsigned int color);
 unsigned char	get_green(unsigned int color);
 unsigned char	get_blue(unsigned int color);
 unsigned int	set_color(int t, int r, int g, int b);
-
+//wip
 char			*read_file(int fd);
+int				count(char *s, char c);
 #endif
