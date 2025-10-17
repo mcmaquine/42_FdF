@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:40:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/16 08:25:46 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/17 08:57:55 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,18 @@ int	file_input_validations(t_window *w, int argc, char **argv)
 	}
 	return (1);
 }
-/*
+
 int	main(int argc, char **argv)
 {
-	t_window	w;
-	t_matrix	*m;
-	// t_matrix	*tf;
-	// t_matrix	*ms;
+	char	*line;
+	(void)argc;
 
-	w.height = 720;
-	w.width = 1280;
-	m = get_rotate_mtx_x(1);
-	// ms = get_scale_mtx(10, 10, 10);
-	//tf = mult_mat(ms, m);
-	file_input_validations(&w, argc, argv);
-	// ft_printf("%X", set_color(0, 0, 0, 0xFF));
-	free_data(&w);
-	free_matrix(m);
-	// free_matrix(ms);
-	//free_matrix(tf);
-}*/
+	int fd = open(argv[1], O_RDONLY);
+	line = read_file(fd);
+	ft_printf("%s", line);
+	close(fd);
+	free(line);
+}
 
 
 void	start_draw(t_window *w)
@@ -86,7 +78,7 @@ void	start_draw(t_window *w)
 	free_matrix(scaled);
 	free_matrix(m);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	t_window	wind;
@@ -105,4 +97,4 @@ int	main(int argc, char **argv)
 	mlx_hook(wind.win, 17, 0, on_close, &wind);
 	mlx_hook(wind.win, 2, 1L << 0, key_press_event, &wind);
 	mlx_loop(wind.mlx);
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 10:13:58 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/14 08:31:54 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/17 09:08:21 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,39 @@ int	read_points(char *file_name, t_window *w)
 	}
 	close(fd);
 	return (y);
+}
+
+char	*join(char *s1, char *s2)
+{
+	char	*joined;
+	char	*s;
+
+	if (!s1)
+	{
+		s = ft_calloc(1, 1);
+		joined = ft_strjoin(s, s2);
+	}
+	else
+		joined = ft_strjoin(s1, s2);
+	if (!s1)
+		free(s);
+	else
+		free(s1);
+	free(s2);
+	return (joined);
+}
+
+char	*read_file(int fd)
+{
+	char	*line;
+	char	*full_line;
+
+	line = get_next_line(fd);
+	full_line = NULL;
+	while (line)
+	{
+		full_line = join(full_line, line);
+		line = get_next_line(fd);
+	}
+	return (full_line);
 }
