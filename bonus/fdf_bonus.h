@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:33:52 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 15:08:25 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:51:54 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ typedef struct s_canva
 
 typedef struct s_point
 {
-	int			x;
-	int			y;
-	int			z;
-	__uint32_t	color;
+	int				x;
+	int				y;
+	int				z;
+	int				w;
+	unsigned int	color;
 }	t_point;
 
 typedef struct s_matrix
@@ -134,4 +135,7 @@ unsigned char	get_blue(unsigned int color);
 unsigned int	set_color(int t, int r, int g, int b);
 void			*init_color_step(t_point *p_st, t_point *p_end, int *dxdy);
 unsigned int	get_step_color(t_color *c);
+
+//wip
+t_matrix	*get_perspective_mtx(double far, double near);
 #endif

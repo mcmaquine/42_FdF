@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:29:10 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/15 17:13:24 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:50:53 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,33 @@ Returns the product.
 void	*mult_point_matrix(void *p, void *m)
 {
 	t_point		*cp;
-	t_point		*pnt;
-	t_matrix	*mat;
+	t_point		*pt;
+	t_matrix	*mt;
 
 	if (!p || !m)
 		return (NULL);
-	mat = m;
-	pnt = p;
-	if (mat->col != 3)
+	mt = m;
+	pt = p;
+	if (mt->col != 4)
 		return (NULL);
 	cp = ft_calloc(1, sizeof(t_point));
 	if (!cp)
 		return (NULL);
-	cp->x = (int )(pnt->x * mat->a[0][0] + pnt->y * mat->a[1][0]
-			+ pnt->z * mat->a[2][0]);
-	cp->y = (int )(pnt->x * mat->a[0][1] + pnt->y * mat->a[1][1]
-			+ pnt->z * mat->a[2][1]);
-	cp->z = (int )(pnt->x * mat->a[0][2] + pnt->y * mat->a[1][2]
-			+ pnt->z * mat->a[2][2]);
-	cp->color = pnt->color;
+	cp->x = (int )(pt->x * mt->a[0][0] + pt->y * mt->a[1][0]
+			+ pt->z * mt->a[2][0] + mt->a[3][0]);
+	cp->y = (int )(pt->x * mt->a[0][1] + pt->y * mt->a[1][1]
+			+ pt->z * mt->a[2][1] + mt->a[3][1]);
+	cp->z = (int )(pt->x * mt->a[0][2] + pt->y * mt->a[1][2]
+			+ pt->z * mt->a[2][2] + mt->a[3][3]);
+	cp->w = (int)(pt->x * mt->a[0][3] + pt->y * mt->a[1][3]
+			+ pt->z * mt->a[2][3] + mt->a[3][3]);
+	cp->color = pt->color;
+	if (!cp->w)
+	{
+		cp->x /= cp->w;
+		cp->y /= cp->w;
+		cp->z /= cp->w;
+	}
 	return (cp);
 }
 

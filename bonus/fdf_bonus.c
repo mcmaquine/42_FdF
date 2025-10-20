@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:32:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/15 16:34:47 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:52:48 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	start_draw(t_window *w)
 	t_matrix	*scaled;
 	t_matrix	*m;
 
-	w->current_tf = get_isometric_mtx_tf(0);
+	//w->current_tf = get_isometric_mtx_tf(0);
+	w->current_tf = get_perspective_mtx(100.0, 50.0);
 	w->curr_scale = 10.0;
 	scaled = get_scale_mtx(w->curr_scale,w->curr_scale, w->curr_scale);
 	m = mult_mat(scaled, w->current_tf);
