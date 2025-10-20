@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:57:33 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/15 19:39:36 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/20 14:01:51 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ void			*create_window(t_window *wind, int width, int height);
 void			paint_canva_x(t_window *w, t_matrix *tf, int x, int y);
 void			paint_canva_y(t_window *w, t_matrix *tf, int x, int y);
 void			clear_canva(t_window *w);
-void			lineDraw(t_window *w, t_point *p0, t_point *p1);
+void			line_draw(t_window *w, t_point *p0, t_point *p1);
+void			draw_horizontal(t_window *w, t_point *p0, t_point *p1);
+void			draw_vertical(t_window *w, t_point *p0, t_point *p1);
+void			paint_line(t_window *w, t_point *p0, t_point *p1);
 //file input validation
 int				validate_file(int fd, int *rows);
 void			validate_element(char **spl, int y, t_window *w);
@@ -122,4 +125,6 @@ unsigned char	get_red(unsigned int color);
 unsigned char	get_green(unsigned int color);
 unsigned char	get_blue(unsigned int color);
 unsigned int	set_color(int t, int r, int g, int b);
+void			*init_color_step(t_point *p_st, t_point *p_end, int *dxdy);
+unsigned int	get_step_color(t_color *c);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 14:58:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/15 17:13:47 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/20 15:41:54 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,22 @@ t_matrix	*get_rotate_mtx_z(double theta)
 	sm->a[1][1] = cos(theta);
 	sm->a[2][2] = 1.0;
 	return (sm);
+}
+
+/*
+Transform a point to perspective
+*/
+t_point	*tf_to_perspective(t_point *p)
+{
+	t_point	*p_ps;
+
+	p_ps = ft_calloc(1, sizeof(t_point));
+	if (!p_ps)
+		return (NULL);
+	if (!p->z)
+		p->z = 1;
+	p_ps->x = p->x / (-p->z);
+	p_ps->y = p->y / (-p->z);
+	p_ps->z = 1;
+	p_ps->color = p->color;
 }

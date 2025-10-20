@@ -12,6 +12,7 @@ MLX = $(MLX_DIR)/libmlx.a
 
 SRC =	src/fdf.c\
 		src/fdf_color_util.c\
+		src/fdf_color_step.c\
 		src/fdf_utils.c\
 		src/fdf_utils_a.c\
 		src/fdf_draw_util.c\
@@ -25,6 +26,7 @@ SRC =	src/fdf.c\
 
 BONUS = bonus/fdf_bonus.c\
 		bonus/fdf_color_util_bonus.c\
+		bonus/fdf_color_step_bonus.c\
 		bonus/fdf_utils_bonus.c\
 		bonus/fdf_utils_a_bonus.c\
 		bonus/fdf_draw_util_bonus.c\
@@ -42,6 +44,7 @@ OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(BONUS:.c=.o)
 
 CFLAGS = -Wall -Werror -Wextra -g
+
 LFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -L$(INCLIB) -lXext -lX11 -lm -lbsd
 
 all: $(LIBFT) $(MLX) $(NAME)

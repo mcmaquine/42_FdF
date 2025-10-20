@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:40:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/16 08:25:46 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/20 14:12:09 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ void	start_draw(t_window *w)
 	t_matrix	*m;
 
 	ft_printf("get scalings...\n");
-	w->current_tf = get_isometric_mtx_tf(0);
-	w->curr_scale = get_max_scaling(w);
+	//w->current_tf = get_isometric_mtx_tf(0);
+	w->current_tf = get_rotate_mtx_x (- M_PI / 3);
+	//w->curr_scale = get_max_scaling(w);
+	w->curr_scale = 200.0;
 	scaled = get_scale_mtx(w->curr_scale,w->curr_scale, 0.4 * w->curr_scale);
 	m = mult_mat(scaled, w->current_tf);
 	get_figure_center(w, m, &(w->pan_x), &(w->pan_y));
