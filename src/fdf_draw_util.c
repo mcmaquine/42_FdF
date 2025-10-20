@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 12:49:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/10 16:53:51 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/20 13:20:08 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,22 @@ void	paint_canva_y(t_window *w, t_matrix *tf, int x, int y)
 			free(p0);
 			free(p1);
 		}
+	}
+}
+
+/*
+Clear canva writing color black on every pixel.
+*/
+void	clear_canva(t_window *w)
+{
+	int		x;
+	int		y;
+
+	x = -1;
+	while (++x < w->width)
+	{
+		y = -1;
+		while (++y < w->height)
+			paint_pixel(w, x, y, 0);
 	}
 }
