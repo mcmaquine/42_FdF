@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 void	get_figure_center(t_window *w, t_matrix *tf, int *cx, int *cy)
 {
@@ -43,7 +44,7 @@ static void	*get_scaled_isometric()
 	t_matrix	*iso;
 	t_matrix	*product;
 
-	sc = get_scale_mtx(1.0, 1.0, 0.4);
+	sc = get_scale_mtx(10.0, 10.0, 4.0);
 	iso = get_isometric_mtx_tf(0);
 	product = mult_mat(iso, sc);
 	free_matrix(sc);
@@ -98,7 +99,7 @@ double	get_max_scaling(t_window *w)
 	if (range_x[0] > range_y[0])
 		range_x[0] = range_y[0];
 	if (range_x[0] > 5.0)
-		return (range_x[0]);
+		return (range_x[0] * 10);
 	else
 		return (5.0);
 }

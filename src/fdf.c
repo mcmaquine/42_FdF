@@ -73,9 +73,9 @@ void	start_draw(t_window *w)
 	t_matrix	*scaled;
 	t_matrix	*m;
 
+	ft_printf("get scalings...\n");
 	w->current_tf = get_isometric_mtx_tf(0);
 	w->curr_scale = get_max_scaling(w);
-	ft_printf("get scalings...\n");
 	scaled = get_scale_mtx(w->curr_scale,w->curr_scale, 0.4 * w->curr_scale);
 	m = mult_mat(scaled, w->current_tf);
 	get_figure_center(w, m, &(w->pan_x), &(w->pan_y));
