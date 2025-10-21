@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:33:52 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 16:51:54 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/20 20:28:30 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define KEY_RIGHT 65363
+# define KEY_LEFT 65361
 
 typedef struct s_color
 {
@@ -61,7 +63,6 @@ typedef struct s_point
 	int				x;
 	int				y;
 	int				z;
-	int				w;
 	unsigned int	color;
 }	t_point;
 
@@ -81,7 +82,9 @@ typedef struct s_window
 	t_canva		canva;
 	t_data		data;
 	t_matrix	*current_tf;
-	double		curr_scale;
+	double		curr_scale_x;
+	double		curr_scale_y;
+	double		curr_scale_z;
 	int			pan_x;
 	int			pan_y;
 }	t_window;
@@ -120,6 +123,7 @@ t_matrix		*get_rotate_mtx_y(double theta);
 t_matrix		*get_rotate_mtx_z(double theta);
 t_matrix		*get_isometric_mtx_tf(double orientation);
 void			get_figure_center(t_window *w, t_matrix *tf, int *cx, int *cy);
+double			get_max_scaling(t_window *w);
 t_matrix		*get_dimetric_mtx_tf(void);
 // window events
 int				key_press_event(int keycode, t_window *w);
@@ -127,6 +131,7 @@ int				pan_event(int keycode, t_window *w);
 int				on_close(t_window *w);
 int				mouse_hook(int button, int x, int y, t_window *w);
 void			scale_image(t_window *w);
+void			rotate(t_window *w, double step);
 //color utils
 unsigned char	get_transparency(unsigned int color);
 unsigned char	get_red(unsigned int color);
@@ -135,7 +140,4 @@ unsigned char	get_blue(unsigned int color);
 unsigned int	set_color(int t, int r, int g, int b);
 void			*init_color_step(t_point *p_st, t_point *p_end, int *dxdy);
 unsigned int	get_step_color(t_color *c);
-
-//wip
-t_matrix	*get_perspective_mtx(double far, double near);
 #endif

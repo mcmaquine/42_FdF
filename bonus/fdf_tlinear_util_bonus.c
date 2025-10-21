@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 14:58:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 16:53:33 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/20 19:45:03 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ t_matrix	*get_scale_mtx(double kx, double ky, double kz)
 {
 	t_matrix	*sm;
 
-	sm = create_matrix(4, 4);
+	sm = create_matrix(3, 3);
 	if (!sm)
 		return (NULL);
 	sm->a[0][0] = kx;
 	sm->a[1][1] = ky;
 	sm->a[2][2] = kz;
-	sm->a[3][3] = 1.0;
 	return (sm);
 }
 
@@ -41,7 +40,7 @@ t_matrix	*get_rotate_mtx_x(double theta)
 {
 	t_matrix	*sm;
 
-	sm = create_matrix(4, 4);
+	sm = create_matrix(3, 3);
 	if (!sm)
 		return (NULL);
 	sm->a[0][0] = 1.0;
@@ -49,7 +48,6 @@ t_matrix	*get_rotate_mtx_x(double theta)
 	sm->a[1][2] = sin(theta);
 	sm->a[2][1] = -sin(theta);
 	sm->a[2][2] = cos(theta);
-	sm->a[3][3] = 1.0;
 	return (sm);
 }
 
@@ -61,7 +59,7 @@ t_matrix	*get_rotate_mtx_y(double theta)
 {
 	t_matrix	*sm;
 
-	sm = create_matrix(4, 4);
+	sm = create_matrix(3, 3);
 	if (!sm)
 		return (NULL);
 	sm->a[0][0] = cos(theta);
@@ -69,7 +67,6 @@ t_matrix	*get_rotate_mtx_y(double theta)
 	sm->a[1][1] = 1.0;
 	sm->a[2][0] = sin(theta);
 	sm->a[2][2] = cos(theta);
-	sm->a[3][3] = 1.0;
 	return (sm);
 }
 
@@ -81,7 +78,7 @@ t_matrix	*get_rotate_mtx_z(double theta)
 {
 	t_matrix	*sm;
 
-	sm = create_matrix(4, 4);
+	sm = create_matrix(3, 3);
 	if (!sm)
 		return (NULL);
 	sm->a[0][0] = cos(theta);
@@ -89,25 +86,5 @@ t_matrix	*get_rotate_mtx_z(double theta)
 	sm->a[1][0] = -sin(theta);
 	sm->a[1][1] = cos(theta);
 	sm->a[2][2] = 1.0;
-	sm->a[3][3] = 1.0;
 	return (sm);
-}
-
-/*
-Transform a point to perspective
-*/
-t_matrix	*get_perspective_mtx(double far, double near)
-{
-	t_matrix	*mtx;
-
-	mtx = create_matrix(4, 4);
-	if (!mtx)
-		return (NULL);
-	mtx->a[0][0] = 1.0;
-	mtx->a[1][1] = 1.0;
-	mtx->a[2][2] = -far / (far - near);
-	mtx->a[3][2] = -far * near / (far - near);
-	mtx->a[2][3] = -1;
-	mtx->a[3][3] = 0;
-	return (mtx);
 }

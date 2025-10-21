@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:21:47 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 15:01:30 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/20 18:46:27 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void line_draw(t_window *w, t_point *p0, t_point *p1)
 	while ((p0->x != p1->x) && (p0->y != p1->y))
 	{
 		paint_pixel(w, p0->x, p0->y, get_step_color(c));
-		error[1] = 2 * error[0];
+		error[1] = 5 * error[0];
 		if (error[1] >= dxdy[1])
 			update(&error[0], &(p0->x), &dxdy[1], &sxsy[0]);
  		if (error[1] <= dxdy[0])

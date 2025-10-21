@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:29:10 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 16:50:53 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/20 19:46:09 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,18 @@ void	*mult_point_matrix(void *p, void *m)
 		return (NULL);
 	mt = m;
 	pt = p;
-	if (mt->col != 4)
+	if (mt->col != 3)
 		return (NULL);
 	cp = ft_calloc(1, sizeof(t_point));
 	if (!cp)
 		return (NULL);
 	cp->x = (int )(pt->x * mt->a[0][0] + pt->y * mt->a[1][0]
-			+ pt->z * mt->a[2][0] + mt->a[3][0]);
+			+ pt->z * mt->a[2][0]);
 	cp->y = (int )(pt->x * mt->a[0][1] + pt->y * mt->a[1][1]
-			+ pt->z * mt->a[2][1] + mt->a[3][1]);
+			+ pt->z * mt->a[2][1]);
 	cp->z = (int )(pt->x * mt->a[0][2] + pt->y * mt->a[1][2]
-			+ pt->z * mt->a[2][2] + mt->a[3][3]);
-	cp->w = (int)(pt->x * mt->a[0][3] + pt->y * mt->a[1][3]
-			+ pt->z * mt->a[2][3] + mt->a[3][3]);
+			+ pt->z * mt->a[2][2]);
 	cp->color = pt->color;
-	if (!cp->w)
-	{
-		cp->x /= cp->w;
-		cp->y /= cp->w;
-		cp->z /= cp->w;
-	}
 	return (cp);
 }
 

@@ -56,7 +56,7 @@ $(NAME): $(OBJ) $(LIBFT) $(MLX)
 
 $(NAME)_bonus: $(OBJ_BONUS) $(LIBFT) $(MLX)
 	cc $^ -o $@ $(LFLAGS)
-	mv $@ $(NAME)
+	cp $@ $(NAME)
  
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR) all
@@ -70,6 +70,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(NAME)_bonus
 
 re: clean all
 
