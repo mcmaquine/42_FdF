@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:33:52 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 20:28:30 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 15:42:12 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # define KEY_D 100
 # define KEY_RIGHT 65363
 # define KEY_LEFT 65361
+# define KEY_O 111
+# define KEY_L 108
+# define KEY_K 107
 
 typedef struct s_color
 {

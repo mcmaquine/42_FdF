@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:57:35 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 20:36:17 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:34:57 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,10 @@ void	rotate(t_window *w, double step)
 	mlx_put_image_to_window(w->mlx, w->win, w->canva.img, 0, 0);
 	free_matrix(scaled);
 	free_matrix(m);
+}
+
+void	change_view(t_window *w)
+{
+	free_matrix(w->current_tf);
+	w->current_tf = get_dimetric_mtx_tf();
 }

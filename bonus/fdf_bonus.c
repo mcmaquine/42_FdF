@@ -6,16 +6,27 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:32:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 20:30:33 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 15:20:50 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
-int	fdf_usage(void)
+int	fdf_usage(int option)
 {
-	ft_printf("\t\t\tFdf program usage:\n");
-	ft_printf("\t\t\t./fdf <map_file>.fdf\n");
+	if (!option)
+	{
+		ft_printf("\t\t\tFdf program usage:\n");
+		ft_printf("\t\t\t./fdf <map_file>.fdf\n");
+	}
+	else if (option == 1)
+	{
+		ft_printf("\tUse arrow ← and → to rotate\n");
+		ft_printf("\tUse mouse wheel to zoom in or zoom out\n");
+		ft_printf("\tUse a, w, s, d to move image on screen\n");
+		ft_printf("\tUse k to swap between to views\n");
+		ft_printf("\tUse o to increse z scaling, l to decrease\n");
+	}
 	return (0);
 }
 
@@ -24,7 +35,7 @@ int	file_input_validations(t_window *w, int argc, char **argv)
 	int	fd;
 
 	if (argc < 2)
-		return (fdf_usage());
+		return (fdf_usage(0));
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 3)
 	{
@@ -102,6 +113,7 @@ int	main(int argc, char **argv)
 			&wind.canva.bits_per_pixel, &wind.canva.line_length,
 			&wind.canva.endian);
 	start_draw(&wind);
+	fdf_usage(1);
 	mlx_hook(wind.win, 2, 1L << 0, key_press_event, &wind);
 	mlx_hook(wind.win, 17, 0, on_close, &wind);
 	mlx_mouse_hook(wind.win, mouse_hook, &wind);

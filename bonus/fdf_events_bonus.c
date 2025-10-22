@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:33:02 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 20:35:44 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:32:28 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	scale_image(t_window *w)
 	t_matrix	*scaled;
 	t_matrix	*tf;
 
+	clear_canva(w);
 	scaled = get_scale_mtx(w->curr_scale_x, w->curr_scale_y, 
 			0.4 * w->curr_scale_z);
 	tf = mult_mat(scaled, w->current_tf);
@@ -43,16 +44,24 @@ int	key_press_event(int keycode, t_window *w)
 
 	if (keycode == ESC)
 		on_close(w);
-	else if (keycode == KEY_RIGHT)
+	else if (keycode == KEY_RIGHT || keycode == KEY_LEFT)
 	{
-		degree += .2;
+		if (keycode == KEY_RIGHT)
+			degree += .2;
+		else
+			degree -= .2;
 		rotate(w, degree);
 	}
-	else if (keycode == KEY_LEFT)
+	else if (keycode == KEY_O || keycode == KEY_L)
 	{
-		degree -= .2;
-		rotate(w, degree);
+		if (keycode == KEY_O)
+			w->curr_scale_z *= 1.1;
+		else
+			w->curr_scale_z *= 0.9;
+		scale_image(w);
 	}
+	else if (keycode == KEY_K)
+		change_view(w);
 	else
 		pan_event(keycode, w);
 	return (0);
@@ -77,7 +86,7 @@ int	mouse_hook(int button, int x, int y, t_window *w)
 	{
 		w->curr_scale_x *= 0.9;
 		w->curr_scale_y *= 0.9;
-		w->curr_scale_y *= 0.9;
+		w->curr_scale_z *= 0.9;
 		scale_image(w);
 	}
 	if (button == MOUSE_SCR_UP)
