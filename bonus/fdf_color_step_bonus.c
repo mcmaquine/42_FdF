@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 14:58:34 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 20:03:23 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:42:07 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ void	*init_color_step(t_point *p_st, t_point *p_end, int *dxdy)
 	clr->green = get_green(p_st->color);
 	clr->blue = get_blue(p_st->color);
 	clr->tpcy = (double)(get_transparency(p_end->color)
-			- get_transparency(p_st->color)/dx);
-	clr->step_r = (double)(get_red(p_end->color) - get_red(p_st->color))/dx;
-	clr->step_g = (double)(get_green(p_end->color) - get_green(p_st->color))/dx;
-	clr->step_b = (double)(get_blue(p_end->color) - get_blue(p_st->color))/dx;
+			- get_transparency(p_st->color) / dx);
+	clr->step_r = (double)(get_red(p_end->color) - get_red(p_st->color)) / dx;
+	clr->step_g = (double)(get_green(p_end->color)
+			- get_green(p_st->color)) / dx;
+	clr->step_b = (double)(get_blue(p_end->color)
+			- get_blue(p_st->color)) / dx;
 	return (clr);
 }
 

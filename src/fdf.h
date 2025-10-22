@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:57:33 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 14:01:51 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:45:25 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_color
 	double	blue;
 }	t_color;
 
-typedef	struct s_data
+typedef struct s_data
 {
 	int				abscissa;
 	int				ordinate;

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 15:31:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/15 10:14:55 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:49:47 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_matrix	*get_isometric_mtx_tf(double orientation)
 	return (mat_2);
 }
 
-t_matrix	*get_dimetric_mtx_tf()
+t_matrix	*get_dimetric_mtx_tf(void)
 {
 	t_matrix	*mat_1;
 	t_matrix	*mat_2;

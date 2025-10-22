@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 12:49:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 19:55:28 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:41:06 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ void	paint_canva_x(t_window *w, t_matrix *tf, int x, int y)
 		while (++yx[1] < w->data.abscissa - 1)
 		{
 			p0 = set_point(yx[1], yx[0], w->data.coord[yx[0]][yx[1]],
-				w->data.color[yx[0]][yx[1]]);
+					w->data.color[yx[0]][yx[1]]);
 			p1 = set_point(yx[1] + 1, yx[0], w->data.coord[yx[0]][yx[1] + 1],
-				w->data.color[yx[0]][yx[1] + 1]);
- 			p0tf = mult_point_matrix(p0, tf);
+					w->data.color[yx[0]][yx[1] + 1]);
+			p0tf = mult_point_matrix(p0, tf);
 			p1tf = mult_point_matrix(p1, tf);
-			edit_point(p0tf, w->width/2 - x, w->height/2 - y, 0);
-			edit_point(p1tf, w->width/2 - x, w->height/2 - y, 0);
+			edit_point(p0tf, w->width / 2 - x, w->height / 2 - y, 0);
+			edit_point(p1tf, w->width / 2 - x, w->height / 2 - y, 0);
 			paint_line(w, p0tf, p1tf);
 			free(p0);
 			free(p1);
@@ -85,9 +85,9 @@ void	paint_canva_y(t_window *w, t_matrix *tf, int x, int y)
 					w->data.color[yx[0] + 1][yx[1]]);
 			p0tf = mult_point_matrix(p0, tf);
 			p1tf = mult_point_matrix(p1, tf);
-			edit_point(p0tf, w->width/2 - x, w->height/2 - y, 0);
-			edit_point(p1tf, w->width/2 - x, w->height/2 - y, 0);
- 			paint_line(w, p0tf, p1tf);
+			edit_point(p0tf, w->width / 2 - x, w->height / 2 - y, 0);
+			edit_point(p1tf, w->width / 2 - x, w->height / 2 - y, 0);
+			paint_line(w, p0tf, p1tf);
 			free(p0);
 			free(p1);
 		}

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 16:15:44 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 18:48:39 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:35:29 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ void	get_figure_center(t_window *w, t_matrix *tf, int *cx, int *cy)
 	*cy = *cy / total;
 }
 
-static void	*get_scaled_isometric()
+static void	*get_scaled_isometric(t_window *w)
 {
 	t_matrix	*sc;
 	t_matrix	*iso;
 	t_matrix	*product;
 
 	sc = get_scale_mtx(10.0, 10.0, 4.0);
-	iso = get_isometric_mtx_tf(0);
+	iso = w->tf(0.0);
 	product = mult_mat(iso, sc);
 	free_matrix(sc);
 	free_matrix(iso);
@@ -93,7 +93,7 @@ double	get_max_scaling(t_window *w)
 	range_x[1] = range_x[0];
 	range_y[0] = range_x[0];
 	range_y[1] = range_y[0];
-	m = get_scaled_isometric();
+	m = get_scaled_isometric(w);
 	scaling_compare(w, m, range_x, range_y);
 	range_x[0] = (double)(w->width / (range_x[1] - range_x[0]));
 	range_y[0] = (double)(w->height / (range_y[1] - range_y[0]));

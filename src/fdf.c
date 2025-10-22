@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:40:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 14:12:09 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:51:34 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,6 @@ int	file_input_validations(t_window *w, int argc, char **argv)
 	}
 	return (1);
 }
-/*
-int	main(int argc, char **argv)
-{
-	t_window	w;
-	t_matrix	*m;
-	// t_matrix	*tf;
-	// t_matrix	*ms;
-
-	w.height = 720;
-	w.width = 1280;
-	m = get_rotate_mtx_x(1);
-	// ms = get_scale_mtx(10, 10, 10);
-	//tf = mult_mat(ms, m);
-	file_input_validations(&w, argc, argv);
-	// ft_printf("%X", set_color(0, 0, 0, 0xFF));
-	free_data(&w);
-	free_matrix(m);
-	// free_matrix(ms);
-	//free_matrix(tf);
-}*/
-
 
 void	start_draw(t_window *w)
 {
@@ -74,12 +53,12 @@ void	start_draw(t_window *w)
 	t_matrix	*m;
 
 	ft_printf("get scalings...\n");
-	//w->current_tf = get_isometric_mtx_tf(0);
-	w->current_tf = get_rotate_mtx_x (- M_PI / 3);
-	//w->curr_scale = get_max_scaling(w);
-	w->curr_scale = 200.0;
-	scaled = get_scale_mtx(w->curr_scale,w->curr_scale, 0.4 * w->curr_scale);
+	w->current_tf = get_isometric_mtx_tf(0);
+	w->curr_scale = get_max_scaling(w);
+	scaled = get_scale_mtx(w->curr_scale, w->curr_scale, 0.4 * w->curr_scale);
 	m = mult_mat(scaled, w->current_tf);
+	w->pan_x = 0;
+	w->pan_y = 0;
 	get_figure_center(w, m, &(w->pan_x), &(w->pan_y));
 	ft_printf("drawing...\n");
 	paint_canva_x(w, m, w->pan_x, w->pan_y);

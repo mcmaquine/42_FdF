@@ -6,12 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 16:15:44 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/16 17:44:50 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:50:00 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 void	get_figure_center(t_window *w, t_matrix *tf, int *cx, int *cy)
 {
@@ -38,7 +37,7 @@ void	get_figure_center(t_window *w, t_matrix *tf, int *cx, int *cy)
 	*cy = *cy / (w->data.abscissa * w->data.ordinate);
 }
 
-static void	*get_scaled_isometric()
+static void	*get_scaled_isometric(void)
 {
 	t_matrix	*sc;
 	t_matrix	*iso;
@@ -91,7 +90,7 @@ double	get_max_scaling(t_window *w)
 	range_x[1] = range_x[0];
 	range_y[0] = range_x[0];
 	range_y[1] = range_y[0];
-	m = get_scaled_isometric();
+	m = get_scaled_isometric(w);
 	scaling_compare(w, m, range_x, range_y);
 	range_x[0] = (double)(w->width / (range_x[1] - range_x[0]));
 	range_y[0] = (double)(w->height / (range_y[1] - range_y[0]));

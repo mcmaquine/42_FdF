@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:21:47 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/20 18:46:27 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:39:00 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	draw_vertical(t_window *w, t_point *p0, t_point *p1)
 	free(p1);
 }
 
-void line_draw(t_window *w, t_point *p0, t_point *p1)
+void	line_draw(t_window *w, t_point *p0, t_point *p1)
 {
 	int		dxdy[2];
 	int		sxsy[2];
@@ -87,7 +87,7 @@ void line_draw(t_window *w, t_point *p0, t_point *p1)
 		error[1] = 5 * error[0];
 		if (error[1] >= dxdy[1])
 			update(&error[0], &(p0->x), &dxdy[1], &sxsy[0]);
- 		if (error[1] <= dxdy[0])
+		if (error[1] <= dxdy[0])
 			update(&error[0], &(p0->y), &dxdy[0], &sxsy[1]);
 	}
 	free(c);

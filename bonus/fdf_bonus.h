@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:33:52 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/10/22 15:42:12 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:34:21 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_color
 	double	blue;
 }	t_color;
 
-typedef	struct s_data
+typedef struct s_data
 {
 	int				abscissa;
 	int				ordinate;
@@ -78,18 +78,19 @@ typedef struct s_matrix
 
 typedef struct s_window
 {
+	t_matrix	*(*tf)(double);
 	void		*mlx;
 	void		*win;
 	int			width;
 	int			height;
 	t_canva		canva;
 	t_data		data;
-	t_matrix	*current_tf;
 	double		curr_scale_x;
 	double		curr_scale_y;
 	double		curr_scale_z;
 	int			pan_x;
 	int			pan_y;
+	double		orient;
 }	t_window;
 
 //utils
@@ -125,16 +126,17 @@ t_matrix		*get_rotate_mtx_x(double theta);
 t_matrix		*get_rotate_mtx_y(double theta);
 t_matrix		*get_rotate_mtx_z(double theta);
 t_matrix		*get_isometric_mtx_tf(double orientation);
+t_matrix		*get_dimetric_mtx_tf(double orientation);
 void			get_figure_center(t_window *w, t_matrix *tf, int *cx, int *cy);
 double			get_max_scaling(t_window *w);
-t_matrix		*get_dimetric_mtx_tf(void);
 // window events
 int				key_press_event(int keycode, t_window *w);
 int				pan_event(int keycode, t_window *w);
 int				on_close(t_window *w);
 int				mouse_hook(int button, int x, int y, t_window *w);
 void			scale_image(t_window *w);
-void			rotate(t_window *w, double step);
+void			rotate(t_window *w);
+void			change_view(t_window *w);
 //color utils
 unsigned char	get_transparency(unsigned int color);
 unsigned char	get_red(unsigned int color);
